@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors'); // To handle CORS
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const app = express();
 
@@ -62,6 +62,18 @@ app.get('/students', (req, res) => {
       if (err) {
           console.error('Error fetching students:', err);
           res.status(500).send('Error fetching students');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+app.get('/tutors', (req, res) => {
+  const query = 'SELECT * FROM tutor';
+  db.query(query, (err, results) => {
+      if (err) {
+          console.error('Error fetching Tutors:', err);
+          res.status(500).send('Error fetching Tutors');
         } else {
             res.json(results);
         }

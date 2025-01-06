@@ -1,0 +1,29 @@
+.navbar {
+    background-color: #333; /* Dark background color */
+    padding: 10px 20px; /* Padding around the navbar */
+    width: 100%; /* Full width */
+}
+
+.navbar-menu {
+    list-style: none; /* Remove default bullet points */
+    display: flex; /* Use flexbox to arrange items horizontally */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.navbar-menu li {
+    margin: 0 15px; /* Spacing between menu items */
+    color: white; /* Text color */
+    cursor: pointer; /* Show pointer cursor on hover */
+    font-weight: normal; /* Default font weight */
+}
+
+.navbar-menu li.active {
+    font-weight: bold; /* Bold text for active menu item */
+    color: #00bfff; /* Optional: change color for the active item */
+}
+
+/* .navbar-menu li:hover {
+    color: #00bfff; 
+    text-decoration: underline; 
+} */
