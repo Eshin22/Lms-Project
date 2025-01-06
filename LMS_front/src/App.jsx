@@ -1,37 +1,56 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import './App.css';
 
 function App() {
-  const [array, setArray] = useState([]);
+    const [students, setStudents] = useState([]);
 
-  const fetchAPI = async () => {
-    try {
-      const response = await axios.get('http://localhost:8081/');
-      console.log(response.data);
-      
-      setArray(response.data.fruit);
-    } catch (error) {
-      console.log('Error fetching data from the backend:', error);
-    }
-  };
+    useEffect(() => {
+        fetch('http://localhost:5000/students')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setStudents(data); // Set the fetched data to state
+            })
+            .catch(err => console.log(err));
+    }, []);
 
-  useEffect(() => {
-
-    fetchAPI();
-  }, []);
-
-  return (
-    <div>
-    <div><h1>in Home Page</h1>
-    <h2>Fetching data from backend</h2>
-    </div>
-    
-    {console.log(array)}
-    {array.map((fruit, index) => (
-      <div key={index}><p>{fruit}</p></div>
-    ))} 
-    </div>
-  );
+    return (
+        <div>
+            <h1>Student Details</h1>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>User Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Birth Date</th>
+                        <th>NIC</th>
+                        <th>Course ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {students.map((student) => (
+                        <tr key={student.Student_ID}>
+                            <td>{student.Student_ID}</td>
+                            <td>{student.User_Name}</td>
+                            <td>{student.First_Name}</td>
+                            <td>{student.Last_Name}</td>
+                            <td>{student.Address}</td>
+                            <td>{student.Phone_Number}</td>
+                            <td>{student.Email}</td>
+                            <td>{student.Birth_Date}</td>
+                            <td>{student.NIC}</td>
+                            <td>{student.Course_ID}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 export default App;

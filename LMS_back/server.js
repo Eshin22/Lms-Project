@@ -1,28 +1,23 @@
 const express = require('express');
-const cors = require('cors'); // To handle CORS
-const mysql = require('mysql');
+const mysql = require('mysql2');
+const cors = require('cors');
 
 const app = express();
+const PORT = 5000;
 
-const port = 8081;
-
-// Enable CORS
-
-app.use(cors({
-    origin: 'http://localhost:5174', // Allow requests from the frontend
-    methods: ['GET', 'POST'],       // Specify allowed methods
-  }));
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-
-  const db = mysql.createConnection({
+// MySQL connection
+const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password: '1212',
+    user: 'root', // replace with your MySQL username
+    password: 'Matheesha@11', // replace with your MySQL password
     database: 'lms_project',
-  });
+});
 
-  db.connect((err) => {
+db.connect((err) => {
     if (err) {
         console.error('Database connection failed:', err);
         return;
@@ -30,47 +25,24 @@ app.use(express.json());
     console.log('Connected to the MySQL database.');
 });
 
+app.get('/',(req,res)=>{
+    return res.json("from backend side")
+})
 
-
-
-
-
-app.get("/", (req, res) => {
-    res.send("Hello from the Node.js backend!");
-});
-
-// Example API route
-// app.get("/api/data", (req, res) => {
-//     res.json({ message: "This is data from the backend!" });
-// });
-
-// app.get("/", (req, res) => {
-//     const query = 'SELECT * FROM lms_project.Courses;'; // Adjust query based on your table
-//     db.query(sql, (err, results) => {
-//         if (err) {
-//             console.error(err);
-//             res.status(500).send("An error occurred while fetching courses.");
-//         } else {
-//             res.json(results);
-//         }
-//     });
-// });
-
+// API endpoint to fetch student details
 app.get('/students', (req, res) => {
-  const query = 'SELECT * FROM student';
-  db.query(query, (err, results) => {
-      if (err) {
-          console.error('Error fetching students:', err);
-          res.status(500).send('Error fetching students');
+    const query = 'SELECT * FROM student';
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching students:', err);
+            res.status(500).send('Error fetching students');
         } else {
             res.json(results);
         }
     });
 });
 
-
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Backend is running on http://localhost:${port}`);
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
