@@ -1,14 +1,22 @@
 /* Navbar Styling */
+/* Navbar Styling */
 .navbar {
   background-color: #333; /* Dark background color */
   padding: 15px 30px; /* Padding around the navbar */
   width: 100%; /* Full width */
+  max-width: 100%; /* Prevents it from exceeding the screen width */
+  box-sizing: border-box; /* Includes padding in width calculation */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
+  display: flex; /* Flexbox for aligning menu and icons */
+  justify-content: space-between; /* Space between menu and icons */
+  align-items: center;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
+
 
 /* Navbar Menu */
 .navbar-menu {
@@ -16,7 +24,6 @@
   display: flex; /* Use flexbox to arrange items horizontally */
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
-  justify-content: center; /* Center the menu items */
   align-items: center;
 }
 
@@ -44,14 +51,40 @@
   transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
+/* Navbar Icons */
+.navbar-icons {
+  display: flex; /* Align icons horizontally */
+  align-items: center; /* Center align icons */
+}
+
+.navbar-icons .icon {
+  color: white; /* Icon color */
+  margin: 0 10px; /* Spacing between icons */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar-icons .icon:hover {
+  color: #00bfff; /* Highlighted color on hover */
+  transform: scale(1.2); /* Slightly enlarge icon on hover */
+}
+
 /* Responsive Design - For smaller screens */
 @media (max-width: 768px) {
-  .navbar-menu {
+  .navbar {
     flex-direction: column; /* Stack the items vertically */
     padding: 20px;
   }
 
+  .navbar-menu {
+    flex-direction: column; /* Stack menu items vertically */
+  }
+
   .navbar-menu a {
-    margin: 10px 0; /* Space between stacked items */
+    margin: 10px 0; /* Space between stacked menu items */
+  }
+
+  .navbar-icons {
+    margin-top: 15px; /* Space above icons */
   }
 }
