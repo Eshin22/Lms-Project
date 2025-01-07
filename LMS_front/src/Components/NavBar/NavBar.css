@@ -1,29 +1,58 @@
+/* Navbar Styling */
 .navbar {
     background-color: #333; /* Dark background color */
-    padding: 10px 20px; /* Padding around the navbar */
+    padding: 15px 30px; /* Padding around the navbar */
     width: 100%; /* Full width */
-}
-
-.navbar-menu {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  /* Navbar Menu */
+  .navbar-menu {
     list-style: none; /* Remove default bullet points */
     display: flex; /* Use flexbox to arrange items horizontally */
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
-}
-
-.navbar-menu li {
-    margin: 0 15px; /* Spacing between menu items */
+    justify-content: center; /* Center the menu items */
+    align-items: center;
+  }
+  
+  /* Navbar Menu Items */
+  .navbar-menu li {
+    margin: 0 20px; /* Spacing between menu items */
     color: white; /* Text color */
     cursor: pointer; /* Show pointer cursor on hover */
-    font-weight: normal; /* Default font weight */
-}
-
-.navbar-menu li.active {
+    font-weight: 500; /* Normal font weight */
+    font-size: 1.1em; /* Slightly larger font size */
+    text-transform: uppercase; /* Uppercase letters for a sleek look */
+    transition: all 0.3s ease; /* Smooth transition on hover */
+  }
+  
+  /* Active Navbar Item */
+  .navbar-menu li.active {
     font-weight: bold; /* Bold text for active menu item */
-    color: #00bfff; /* Optional: change color for the active item */
-}
-
-/* .navbar-menu li:hover {
-    color: #00bfff; 
-    text-decoration: underline; 
-} */
+    color: #00bfff; /* Highlighted color for the active item */
+    text-decoration: underline; /* Underline for active items */
+  }
+  
+  /* Hover Effect for Navbar Items */
+  .navbar-menu li:hover {
+    color: #00bfff; /* Color change on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+  
+  /* Responsive Design - For smaller screens */
+  @media (max-width: 768px) {
+    .navbar-menu {
+      flex-direction: column; /* Stack the items vertically */
+      padding: 20px;
+    }
+  
+    .navbar-menu li {
+      margin: 10px 0; /* Space between stacked items */
+    }
+  }
+  
