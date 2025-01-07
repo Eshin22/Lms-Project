@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors'); // To handle CORS
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.use(express.json());
   const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '1212',
+    password: 'Em#1014#',
     database: 'lms_project',
   });
 
