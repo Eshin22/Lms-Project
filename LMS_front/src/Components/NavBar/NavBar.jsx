@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 const NavBar = () => {
@@ -7,60 +8,60 @@ const NavBar = () => {
   return (
     <div className="navbar">
       <ul className="navbar-menu">
-        <li
+        <Link to='/'
           className={menu === "Home" ? "active" : ""}
           onClick={() => setMenu("Home")}
         >
           Home
-        </li>
-        <li
+        </Link>
+        <Link to='/dashboard'
           className={menu === "Dashboard" ? "active" : ""}
           onClick={() => setMenu("Dashboard")}
         >
           Dashboard
-        </li>
-        <li
+        </Link>
+        <Link to='/mycourses'
           className={menu === "MyCourses" ? "active" : ""}
           onClick={() => setMenu("MyCourses")}
         >
           My Courses
-        </li>
-        <li
+        </Link>
+        <Link to='/profile'
           className={menu === "Profile" ? "active" : ""}
           onClick={() => setMenu("Profile")}
         >
           Profile
-        </li>
-        <li
+        </Link>
+        <Link to='logging'
           className={menu === "Logout" ? "active" : ""}
           onClick={() => setMenu("Logout")}
         >
           Logout
-        </li>
-        <li
+        </Link>
+        <Link to='/notification'
           className={menu === "Notification" ? "active" : ""}
           onClick={() => setMenu("Notification")}
         >
           Notification
-        </li>
-        <li
+        </Link>
+        <Link to='/settings'
           className={menu === "Settings" ? "active" : ""}
           onClick={() => setMenu("Settings")}
         >
           Settings
-        </li>
-        <li
+        </Link>
+        <Link to='/submission'
           className={menu === "Submissions" ? "active" : ""}
           onClick={() => setMenu("Submissions")}
         >
           Submissions
-        </li>
-        <li
+        </Link>
+        <Link to='/grade'
           className={menu === "Grades" ? "active" : ""}
           onClick={() => setMenu("Grades")}
         >
           Grades
-        </li>
+        </Link>
       </ul>
     </div>
   );

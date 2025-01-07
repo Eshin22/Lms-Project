@@ -21,7 +21,7 @@
   }
   
   /* Navbar Menu Items */
-  .navbar-menu li {
+  .navbar-menu a {
     margin: 0 20px; /* Spacing between menu items */
     color: white; /* Text color */
     cursor: pointer; /* Show pointer cursor on hover */
@@ -32,14 +32,14 @@
   }
   
   /* Active Navbar Item */
-  .navbar-menu li.active {
+  .navbar-menu a.active {
     font-weight: bold; /* Bold text for active menu item */
     color: #00bfff; /* Highlighted color for the active item */
     text-decoration: underline; /* Underline for active items */
   }
   
   /* Hover Effect for Navbar Items */
-  .navbar-menu li:hover {
+  .navbar-menu a:hover {
     color: #00bfff; /* Color change on hover */
     transform: scale(1.1); /* Slightly enlarge on hover */
   }
@@ -51,7 +51,7 @@
       padding: 20px;
     }
   
-    .navbar-menu li {
+    .navbar-menu a {
       margin: 10px 0; /* Space between stacked items */
     }
   }
