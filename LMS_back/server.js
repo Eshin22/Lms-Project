@@ -9,7 +9,7 @@ const port = 8081;
 // Enable CORS
 
 app.use(cors({
-    origin: 'http://localhost:5174', // Allow requests from the frontend
+    origin: 'http://localhost:5173', // Allow requests from the frontend
     methods: ['GET', 'POST'],       // Specify allowed methods
   }));
 app.use(express.json());
@@ -18,7 +18,11 @@ app.use(express.json());
   const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
+<<<<<<< HEAD
     password: 'Em#1014#',
+=======
+    password: 'Matheesha@11',
+>>>>>>> ab77fb8c5e6941221f3572c94fb263f5f87947b1
     database: 'lms_project',
   });
 
@@ -62,6 +66,18 @@ app.get('/students', (req, res) => {
       if (err) {
           console.error('Error fetching students:', err);
           res.status(500).send('Error fetching students');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+app.get('/tutors', (req, res) => {
+  const query = 'SELECT * FROM tutor';
+  db.query(query, (err, results) => {
+      if (err) {
+          console.error('Error fetching Tutors:', err);
+          res.status(500).send('Error fetching Tutors');
         } else {
             res.json(results);
         }
