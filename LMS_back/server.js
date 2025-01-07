@@ -2,7 +2,9 @@ const express = require('express');
 const cors = require('cors'); // To handle CORS
 const mysql = require('mysql');
 
+
 const app = express();
+
 
 const port = 8080;
 
@@ -10,7 +12,7 @@ const port = 8080;
 
 app.use(cors({
     origin: 'http://localhost:5174', // Allow requests from the frontend
-    methods: ['GET', 'POST'],       // Specify allowed methods
+    methods: ['GET', 'POST','PUT'],       // Specify allowed methods
   }));
 app.use(express.json());
 
@@ -80,6 +82,37 @@ app.get('/tutors', (req, res) => {
     });
 });
 
+
+app.get('/student/:id', (req, res) => {
+  const studentId = req.params.id;
+  const query = 'SELECT * FROM Student WHERE Student_ID = ?';
+  db.query(query, [studentId], (err, result) => {
+    if (err) return res.status(500).json(err);
+    res.json(result[0]);
+  });
+});
+
+// Update student details
+app.put('/student/:id', (req, res) => {
+  const studentId = req.params.id;
+  const updatedDetails = req.body;
+  const query = `
+    UPDATE Student SET
+      User_Name = ?, First_Name = ?, Last_Name = ?, Address = ?, 
+      Phone_Number = ?, Email = ?, Birth_Date = ?, NIC = ?, Course_ID = ?
+    WHERE Student_ID = ?`;
+
+  const values = [
+    updatedDetails.User_Name, updatedDetails.First_Name, updatedDetails.Last_Name,
+    updatedDetails.Address, updatedDetails.Phone_Number, updatedDetails.Email,
+    updatedDetails.Birth_Date, updatedDetails.NIC, updatedDetails.Course_ID, studentId
+  ];
+
+  db.query(query, values, (err, result) => {
+    if (err) return res.status(500).json(err);
+    res.json({ message: 'Profile updated successfully' });
+  });
+});
 
 
 // Start the server

@@ -6,6 +6,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Grade from "./Pages/Grades/Grade.jsx";
 import Logging from "./Pages/Logging/Logging.jsx";
 import Profile from "./Pages/Profile/Profile.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 
 
 
@@ -22,7 +23,9 @@ function App() {
           <Route path='/logging' element={<Logging/>} />
           <Route path='/profile' element={<Profile />} />
         </Routes>
+        <Footer />
       </div>
+
 
     </BrowserRouter>
 );
