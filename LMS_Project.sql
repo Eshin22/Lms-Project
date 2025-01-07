@@ -26,21 +26,21 @@ CREATE TABLE `Courses` (
 );
 
 CREATE TABLE `Tutor` (
-  `Tutor_ID` varchar(50),
-  `Tutor_Type` Enum('Lecturer','Instructor'),
-  `User_Name` varchar(50),
-  `First_Name` varchar(50),
-  `Last_Name` varchar(50),
-  `Address` varchar(250),
-  `Phone_Number` varchar(50),
-  `Email` varchar(50),
-  `Birth_Date` Date,
-  `NIC` varchar(50),
-  `Course_ID` varchar(50),
+  `Tutor_ID` VARCHAR(50) NOT NULL,
+  `Tutor_Type` ENUM('Lecturer', 'Instructor') NOT NULL,
+  `User_Name` VARCHAR(50) NOT NULL,
+  `First_Name` VARCHAR(50) NOT NULL,
+  `Last_Name` VARCHAR(50) NOT NULL,
+  `Address` VARCHAR(250),
+  `Phone_Number` VARCHAR(50),
+  `Email` VARCHAR(50),
+  `Birth_Date` DATE,
+  `NIC` VARCHAR(50),
+  `Course_ID` VARCHAR(50),
+  `Photo_URL` VARCHAR(15000), -- URL to the tutor's photo
   PRIMARY KEY (`Tutor_ID`),
   FOREIGN KEY (`Course_ID`) REFERENCES `Courses`(`Course_ID`),
   FOREIGN KEY (`User_Name`) REFERENCES `User`(`User_Name`)
-  
 );
 
 CREATE TABLE `Student` (
