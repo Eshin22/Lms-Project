@@ -6,6 +6,7 @@ function App() {
   return (
     <div>
         <Home />
+        {console.log("my name")}
     </div>
 );
 }
