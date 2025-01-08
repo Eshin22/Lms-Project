@@ -99,13 +99,13 @@ app.put('/student/:id', (req, res) => {
   const query = `
     UPDATE Student SET
       User_Name = ?, First_Name = ?, Last_Name = ?, Address = ?, 
-      Phone_Number = ?, Email = ?, Birth_Date = ?, NIC = ?, Course_ID = ?
+      Phone_Number = ?, Email = ?, Birth_Date = ?, NIC = ?, Course_ID = ?,Profile_Picture = ?
     WHERE Student_ID = ?`;
 
   const values = [
     updatedDetails.User_Name, updatedDetails.First_Name, updatedDetails.Last_Name,
     updatedDetails.Address, updatedDetails.Phone_Number, updatedDetails.Email,
-    updatedDetails.Birth_Date, updatedDetails.NIC, updatedDetails.Course_ID, studentId
+    updatedDetails.Birth_Date, updatedDetails.NIC, updatedDetails.Course_ID,updatedDetails.Profile_Picture, studentId
   ];
 
   db.query(query, values, (err, result) => {

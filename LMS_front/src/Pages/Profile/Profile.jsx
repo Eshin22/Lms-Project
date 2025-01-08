@@ -91,6 +91,13 @@ function Profile() {
             value={studentDetails.NIC || ''}
             onChange={handleInputChange}
           />
+          <label>Profile Picture:</label>
+          <input
+            type="text"
+            name="Profile Picture"
+            value={studentDetails.Profile_Picture || ''}
+            onChange={handleInputChange}
+          />
           {/* <label>Course ID:</label>
           <input
             type="text"
@@ -103,6 +110,7 @@ function Profile() {
         </div>
       ) : (
         <div>
+          <img src={studentDetails.Profile_Picture} alt={studentDetails.User_Name} className='profile-picture'/>
           <p><strong>User Name:</strong> {studentDetails.User_Name}</p>
           <p><strong>First Name:</strong> {studentDetails.First_Name}</p>
           <p><strong>Last Name:</strong> {studentDetails.Last_Name}</p>
