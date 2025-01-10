@@ -1,51 +1,131 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import "./Grade.css";
 
 const Grades = () => {
-  const [grades, setGrades] = useState([]);
-  const studentId = "SO1"; // Replace with the actual dynamic student ID as needed
-  const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("module");
+  const [selectedModule, setSelectedModule] = useState(null);
 
-  useEffect(() => {
-    // Fetch grades for the student
-    axios
-      .get(`http://localhost:8081/grades/${studentId}`)
-      .then((response) => {
-        setGrades(response.data);
-        setIsLoading(false); // Data fetched successfully
-        console.log("Grades fetched:", response.data); // Debugging purpose
-      })
-      .catch((error) => {
-        console.error("Error fetching grades:", error);
-        setIsLoading(false); // Stop loading even if there's an error
-      });
-  }, [studentId]);
+  // Sample data for testing
+  const grades = [
+    {
+      Module_ID: "M1",
+      Module_Name: "Mathematics",
+      Grade: "A",
+      Quizzes: [{ Mark: 85 }, { Mark: 90 }, { Mark: 78 }],
+      Assignments: [{ Mark: 88 }, { Mark: 92 }],
+    },
+    {
+      Module_ID: "M2",
+      Module_Name: "Physics",
+      Grade: "B+",
+      Quizzes: [{ Mark: 70 }, { Mark: 75 }],
+      Assignments: [{ Mark: 80 }, { Mark: 85 }],
+    },
+    {
+      Module_ID: "M3",
+      Module_Name: "Chemistry",
+      Grade: "A-",
+      Quizzes: [{ Mark: 88 }, { Mark: 82 }, { Mark: 89 }],
+      Assignments: [{ Mark: 90 }, { Mark: 91 }],
+    },
+  ];
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    setSelectedModule(null); // Reset selected module when category changes
+  };
+
+  const handleModuleClick = (moduleId) => {
+    setSelectedModule(moduleId);
+  };
+
+  const renderDetails = () => {
+    if (!selectedModule) {
+      return <p>Please select a module to view details.</p>;
+    }
+
+    const moduleData = grades.find((module) => module.Module_ID === selectedModule);
+
+    if (!moduleData) {
+      return <p>Module data not found.</p>;
+    }
+
+    if (selectedCategory === "module") {
+      return <p><strong>Overall Grade:</strong> {moduleData.Grade}</p>;
+    } else if (selectedCategory === "quiz") {
+      return moduleData.Quizzes && moduleData.Quizzes.length > 0 ? (
+        <ul>
+          {moduleData.Quizzes.map((quiz, index) => (
+            <li key={index}>
+              Quiz {index + 1}: <strong>{quiz.Mark}</strong>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No quiz data available.</p>
+      );
+    } else if (selectedCategory === "assignment") {
+      return moduleData.Assignments && moduleData.Assignments.length > 0 ? (
+        <ul>
+          {moduleData.Assignments.map((assignment, index) => (
+            <li key={index}>
+              Assignment {index + 1}: <strong>{assignment.Mark}</strong>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No assignment data available.</p>
+      );
+    }
+  };
 
   return (
     <div className="grades-container">
-      
-      
+      <div className="sidebar">
+        <button
+          className={selectedCategory === "module" ? "active" : ""}
+          onClick={() => handleCategoryChange("module")}
+        >
+          Module Grades
+        </button>
+        <button
+          className={selectedCategory === "quiz" ? "active" : ""}
+          onClick={() => handleCategoryChange("quiz")}
+        >
+          Quiz Grades
+        </button>
+        <button
+          className={selectedCategory === "assignment" ? "active" : ""}
+          onClick={() => handleCategoryChange("assignment")}
+        >
+          Assignment Grades
+        </button>
+      </div>
+
       <div className="grades-content">
         <h1 className="grades-title">Grades</h1>
-
-        {/* Show a loading indicator while fetching */}
-        {isLoading ? (
-          <p>Loading grades...</p>
-        ) : grades.length === 0 ? (
-          // If no grades are fetched
-          <p>No grades available for this student.</p>
-        ) : (
-          // If grades are fetched
-          <div className="grades-grid">
-            {grades.map((grade) => (
-              <div className="grade-card" key={grade.Module_ID}>
-                <h2>{grade.Module_Name}</h2>
-                <p>Grade: {grade.Grade}</p>
-              </div>
-            ))}
+        <div className="grades-view">
+          <div className="module-list">
+            <h3>Modules</h3>
+            <ul>
+              {grades.map((grade) => (
+                <li key={grade.Module_ID}>
+                  <a
+                    href="#"
+                    className={selectedModule === grade.Module_ID ? "active-module" : ""}
+                    onClick={() => handleModuleClick(grade.Module_ID)}
+                  >
+                    {grade.Module_Name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-        )}
+          <div className="details-section">
+            <h3>Details</h3>
+            {renderDetails()}
+          </div>
+        </div>
       </div>
     </div>
   );
