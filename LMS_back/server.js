@@ -4,12 +4,12 @@ const mysql = require('mysql2');
 
 const app = express();
 
-const port = 8081;
+const port = 8082;
 
 // Enable CORS
 
 app.use(cors({
-    origin: 'http://localhost:5173', // Allow requests from the frontend
+    origin: 'http://localhost:5174', // Allow requests from the frontend
     methods: ['GET', 'POST'],       // Specify allowed methods
   }));
 app.use(express.json());
@@ -18,7 +18,7 @@ app.use(express.json());
   const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Matheesha@11',
+    password: '1212',
     database: 'lms_project',
   });
 

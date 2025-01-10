@@ -8,7 +8,7 @@ function Tutors() {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8081/tutors")
+    fetch("http://localhost:8082/tutors")
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
