@@ -6,7 +6,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Grade from "./Pages/Grades/Grade.jsx";
 import Logging from "./Pages/Logging/Logging.jsx";
 import Profile from "./Pages/Profile/Profile.jsx";
-
+import Modules from "./Pages/Modules/Module.jsx";
 
 
 function App() {
@@ -21,10 +21,13 @@ function App() {
           <Route path='/grade' element={<Grade/>} />
           <Route path='/logging' element={<Logging/>} />
           <Route path='/profile' element={<Profile />} />
+          <Route path="/modules/:moduleName" element={<Modules />} />
+
         </Routes>
       </div>
 
     </BrowserRouter>
+    
 );
 }
 

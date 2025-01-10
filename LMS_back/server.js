@@ -9,7 +9,7 @@ const port = 8082;
 // Enable CORS
 
 app.use(cors({
-    origin: 'http://localhost:5174', // Allow requests from the frontend
+    origin: 'http://localhost:5173', // Allow requests from the frontend
     methods: ['GET', 'POST'],       // Specify allowed methods
   }));
 app.use(express.json());
@@ -78,6 +78,44 @@ app.get('/tutors', (req, res) => {
             res.json(results);
         }
     });
+});
+
+
+app.get('/modules', (req, res) => {
+  const moduleName = req.query.moduleName;  // Get moduleName from the query parameters
+
+  const query = `
+    SELECT 
+      m.Module_ID,
+      Module_Name,
+      m.Course_ID,
+      Course_Name,
+      Credit,
+      t.Tutor_ID,
+      Tutor_Type,
+      First_Name,
+      Last_Name,
+      email
+    FROM 
+      lms_project.module m
+    LEFT JOIN 
+      teaches t ON m.Module_ID = t.Module_ID
+    LEFT JOIN 
+      tutor tut ON t.Tutor_ID = tut.Tutor_ID
+    LEFT JOIN 
+      courses c ON m.Course_ID = c.Course_ID
+    WHERE 
+      m.Module_Name = ?;
+  `;
+  
+  db.query(query, [moduleName], (err, results) => {
+    if (err) {
+      console.error('Error fetching modules:', err);
+      res.status(500).send('Error fetching modules');
+    } else {
+      res.json(results);
+    }
+  });
 });
 
 
