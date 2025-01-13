@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Module.css";
-import { FiDownload } from "react-icons/fi";
+import { FiDownload, FiTrash2 } from "react-icons/fi";
 
 function Accordion({ title, children }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -84,6 +84,29 @@ function CourseDetails() {
     navigate(`/modules/${moduleName}/add-past-paper`);
   };
 
+  const handleRemovePaper = async (Content_ID) => {
+    try {
+      const response = await fetch(`http://localhost:8082/modules/pastPapers`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ Content_ID }),
+      });
+
+      if (response.ok) {
+        setPastPapers((prev) => prev.filter((paper) => paper.Content_ID !== Content_ID));
+      } else {
+        console.error("Failed to remove past paper:", await response.text());
+        alert("Failed to remove past paper.");
+      }
+    } catch (error) {
+      console.error("Error removing past paper:", error);
+      alert("Failed to remove past paper.");
+    }
+  };
+
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -160,6 +183,13 @@ function CourseDetails() {
                       >
                         <FiDownload />
                       </a>
+                      <button
+                        className="remove"
+                        onClick={() => handleRemovePaper(paper.Content_ID)} // Pass the paper ID
+                      >
+                        <FiTrash2 />
+                      </button>
+
                     </div>
                   ))}
                 </div>

@@ -138,6 +138,27 @@ app.get("/modules/pastPapers", (req, res) => {
   });
 });
 
+app.delete("/modules/pastPapers", (req, res) => {
+  const Content_ID = req.body.Content_ID; // Assuming the front end sends the paper's ID
+
+  const query = `
+  SET FOREIGN_KEY_CHECKS = 0;
+    DELETE FROM lecture_material
+    WHERE Content_ID = ?;
+  SET FOREIGN_KEY_CHECKS = 1;
+  `;
+
+  db.query(query, [Content_ID], (err, result) => {
+    if (err) {
+      console.error("Error deleting past paper:", err);
+      res.status(500).send("Error deleting past paper");
+    } else {
+      res.status(200).send("Past paper deleted successfully");
+    }
+  });
+});
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Backend is running on http://localhost:${port}`);
