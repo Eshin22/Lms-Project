@@ -117,7 +117,7 @@ function CourseDetails() {
     <div className="course-details">
       {modules.length > 0 ? (
         <>
-          <h1>
+          <h1 id="course-title">
             {modules[0].Module_ID}-{moduleName}
           </h1>
           <div className="course-info-box">
@@ -198,6 +198,14 @@ function CourseDetails() {
                 </div>
               </section>
             </Accordion>
+
+            <Accordion title="Week_01">
+              <section className="course-info">
+                <p>
+                  <strong>Credits:</strong> {modules[0].Credit}
+                </p>
+              </section>
+              </Accordion>
           </div>
         </>
       ) : (
