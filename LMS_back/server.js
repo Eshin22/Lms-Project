@@ -125,7 +125,7 @@ app.get("/modules/pastPapers", (req, res) => {
     JOIN 
       module m ON m.Module_Id = lm.Module_ID
     WHERE 
-      lm.Title LIKE '%Past Paper' AND m.Module_Name = ?;
+      lm.description="Past Paper" AND m.Module_Name = ?;
   `;
 
   db.query(query, [moduleName], (err, results) => {

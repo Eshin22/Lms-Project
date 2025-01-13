@@ -119,6 +119,7 @@ CREATE TABLE `Lecture_material` (
   `Visibility` Enum('public','private'),
   `Module_ID` varchar(50),
   `Tutor_ID` varchar(50),
+  `Description` varchar(100),
   PRIMARY KEY (`Content_ID`),
   FOREIGN KEY (`Tutor_ID`) REFERENCES `Tutor`(`Tutor_ID`),
   FOREIGN KEY (`Module_ID`) REFERENCES `Module`(`Module_ID`)

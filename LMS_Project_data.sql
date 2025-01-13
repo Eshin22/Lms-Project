@@ -85,12 +85,15 @@ INSERT INTO `Module_Enrollment` (`Module_Enrollment_ID`, `Student_ID`, `Module_I
 (5, 'S05', 'M05', '2024-02-05');
 
 -- Lecture_material Table
-INSERT INTO `Lecture_material` (`Content_ID`, `Title`, `Type`, `URL`, `Updated_Date`, `Visibility`, `Module_ID`, `Tutor_ID`) VALUES
-(1, 'Intro to Data Structures', 'PDF', 'http://example.com/ds_intro.pdf', '2024-03-01', 'public', 'M01', 'T01'),
-(2, 'Thermodynamics Basics', 'Video', 'http://example.com/thermo_basics.mp4', '2024-03-02', 'public', 'M02', 'T02'),
-(3, 'Accounting Principles', 'Assignment', 'http://example.com/accounting_assignment.pdf', '2024-03-03', 'private', 'M03', 'T03'),
-(4, 'Quantum Mechanics Overview', 'Quiz', 'http://example.com/quantum_quiz.html', '2024-03-04', 'public', 'M04', 'T04'),
-(5, 'Art History Lecture', 'Forum', 'http://example.com/art_forum', '2024-03-05', 'private', 'M05', 'T05');
+INSERT INTO `Lecture_material` (`Content_ID`, `Title`, `Type`, `URL`, `Updated_Date`, `Visibility`, `Module_ID`, `Tutor_ID`,`Description`) VALUES
+(1, 'Intro to Data Structures', 'PDF', 'http://example.com/ds_intro.pdf', '2024-03-01', 'public', 'M01', 'T01','Week 01'),
+(2, 'Thermodynamics Basics', 'Video', 'http://example.com/thermo_basics.mp4', '2024-03-02', 'public', 'M02', 'T02','Week 02'),
+(3, 'Accounting Principles', 'Assignment', 'http://example.com/accounting_assignment.pdf', '2024-03-03', 'private', 'M03', 'T03','Week 02'),
+(4, 'Quantum Mechanics Overview', 'Quiz', 'http://example.com/quantum_quiz.html', '2024-03-04', 'public', 'M04', 'T04','Week 04'),
+(5, 'Art History Lecture', 'Forum', 'http://example.com/art_forum', '2024-03-05', 'private', 'M05', 'T05','Week 01'),
+(6, '2016 Past Paper', 'PDF', 'https://www.alevelapi.com/wp-content/uploads/2020/04/2016-AL-COMBINED-MATHS-PART-II-SINHALA-MEDIUM-AlevelApi-PDF.pdf', '2024-03-10', 'public', 'M02', 'T02', 'Past Paper'),
+(7, '2018 Past Paper', 'PDF', 'https://drive.google.com/file/d/16U2i_JiAxnYRhV1k5Sm8-dGpZgVbbHjI/view?pli=1', '2024-03-21', 'public', 'M02', 'T01', 'Past Paper');
+
 
 -- Quiz Table
 INSERT INTO `Quiz` (`Quiz_ID`, `Content_ID`, `Start_Date_&_Time`, `End_Date_&_Time`, `Duraton`, `Discription`) VALUES
