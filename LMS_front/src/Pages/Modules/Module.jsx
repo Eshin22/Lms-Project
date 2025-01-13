@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Module.css";
+import { FiDownload } from "react-icons/fi";
 
 function Accordion({ title, children }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -58,12 +59,36 @@ function CourseDetails() {
       });
   }, [moduleName]);
 
+  const [pastPapers, setPastPapers] = useState([]);
+
+  //Fetch pastpapers
+  useEffect(() => {
+    fetch(`http://localhost:8082/modules/pastPapers?moduleName=${moduleName}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setPastPapers(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching past papers:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  const handleNavigateToAddPastPaper = () => {
+    navigate(`/modules/${moduleName}/add-past-paper`);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-    
     <div className="course-details">
       {modules.length > 0 ? (
         <>
@@ -98,11 +123,47 @@ function CourseDetails() {
                   </li>
                 </ol>
               </section>
-              <section>
-                <h2 id ="past-paper-heading">Past Papers : </h2>
-                {/* <button id="past-paper-button" onClick={handlelAddPastPaper}>+ Add past paper</button> */}
+
+              <section className="past-papers">
+                <h2 id="past-paper-heading">Past Papers:</h2>
+                <button
+                  id="past-paper-button"
+                  onClick={handleNavigateToAddPastPaper}
+                >
+                  <img
+                    src="/logos/add_mark.png"
+                    id="add-past-paper-icon"
+                    alt="Add Past Paper"
+                  />
+
+                  <span id="add-past-paper-text">Add Past Paper</span>
+                </button>
+                <div className="past-paper-container">
+                  {pastPapers.map((paper, index) => (
+                    <div key={index} className="container">
+                      <div className="icon">
+                        <span>PDF</span>
+                      </div>
+                      <a
+                        href={paper.URL}
+                        className="text"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {paper.Title}
+                      </a>
+
+                      <a
+                        href={paper.URL}
+                        className="download"
+                        download={paper.Title + ".pdf"}
+                      >
+                        <FiDownload />
+                      </a>
+                    </div>
+                  ))}
+                </div>
               </section>
-              
             </Accordion>
           </div>
         </>
