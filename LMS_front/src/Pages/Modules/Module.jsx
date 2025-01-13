@@ -91,9 +91,10 @@ function CourseDetails() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ Content_ID }),
+        body: JSON.stringify({ Content_ID }), // Ensure this matches the backend
+        
       });
-
+  
       if (response.ok) {
         setPastPapers((prev) => prev.filter((paper) => paper.Content_ID !== Content_ID));
       } else {
@@ -105,6 +106,7 @@ function CourseDetails() {
       alert("Failed to remove past paper.");
     }
   };
+  
 
 
   if (loading) {
@@ -183,6 +185,7 @@ function CourseDetails() {
                       >
                         <FiDownload />
                       </a>
+                      {/* {console.log(paper.Content_ID)} */}
                       <button
                         className="remove"
                         onClick={() => handleRemovePaper(paper.Content_ID)} // Pass the paper ID

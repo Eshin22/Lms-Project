@@ -6,12 +6,12 @@ const app = express();
 
 const port = 8082;
 
-// Enable CORS
-
+// Enable CORS before defining routes
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow requests from the frontend
-    methods: ["GET", "POST"], // Specify allowed methods
+    origin: "http://localhost:5173", // Frontend URL
+    methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type"], // Allowed headers
   })
 );
 app.use(express.json());
@@ -119,7 +119,8 @@ app.get("/modules/pastPapers", (req, res) => {
   const query = `
     SELECT 
       lm.Title,
-      lm.URL
+      lm.URL,
+      lm.Content_ID
     FROM 
       lecture_material lm
     JOIN 
@@ -139,24 +140,42 @@ app.get("/modules/pastPapers", (req, res) => {
 });
 
 app.delete("/modules/pastPapers", (req, res) => {
-  const Content_ID = req.body.Content_ID; // Assuming the front end sends the paper's ID
+  const Content_ID = req.body.Content_ID; // Extract Content_ID from the request body
+  
 
-  const query = `
-  SET FOREIGN_KEY_CHECKS = 0;
-    DELETE FROM lecture_material
-    WHERE Content_ID = ?;
-  SET FOREIGN_KEY_CHECKS = 1;
-  `;
+  if (!Content_ID) {
+    return res.status(400).send("Content_ID is required.");
+  }
 
-  db.query(query, [Content_ID], (err, result) => {
+  // Disable foreign key checks, delete the record, and re-enable foreign key checks
+  const disableFKChecks = "SET FOREIGN_KEY_CHECKS = 0;";
+  const deleteQuery = "DELETE FROM lecture_material WHERE Content_ID = ?;";
+  const enableFKChecks = "SET FOREIGN_KEY_CHECKS = 1;";
+
+  db.query(disableFKChecks, (err) => {
     if (err) {
-      console.error("Error deleting past paper:", err);
-      res.status(500).send("Error deleting past paper");
-    } else {
-      res.status(200).send("Past paper deleted successfully");
+      console.error("Error disabling foreign key checks:", err);
+      return res.status(500).send("Error disabling foreign key checks.");
     }
+
+    db.query(deleteQuery, [Content_ID], (err) => {
+      if (err) {
+        console.error("Error deleting past paper:", err);
+        return res.status(500).send("Error deleting past paper.");
+      }
+
+      db.query(enableFKChecks, (err) => {
+        if (err) {
+          console.error("Error enabling foreign key checks:", err);
+          return res.status(500).send("Error enabling foreign key checks.");
+        }
+
+        return res.status(200).send("Past paper deleted successfully.");
+      });
+    });
   });
 });
+
 
 
 // Start the server
