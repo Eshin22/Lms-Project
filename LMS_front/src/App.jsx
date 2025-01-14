@@ -7,7 +7,7 @@ import Grade from "./Pages/Grades/Grade.jsx";
 import Logging from "./Pages/Logging/Logging.jsx";
 import Profile from "./Pages/Profile/Profile.jsx";
 import Modules from "./Pages/Modules/Module.jsx";
-
+import Accordion from "./Components/EditableAccordion/EditableAccordion.jsx";
 
 function App() {
  
@@ -22,6 +22,7 @@ function App() {
           <Route path='/logging' element={<Logging/>} />
           <Route path='/profile' element={<Profile />} />
           <Route path="/modules/:moduleName" element={<Modules />} />
+          <Route path='/Accordion' element={<Accordion />} />
 
         </Routes>
       </div>

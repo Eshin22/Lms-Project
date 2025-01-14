@@ -1,0 +1,73 @@
+/* Container styles */
+.accordion-container {
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Accordion styles */
+  .accordion {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  /* Header styles */
+  .accordion-header {
+    background-color: #4b9bea;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .edit-fields {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .input-field {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Content styles */
+  .accordion-content {
+    background-color: #f8f9fa;
+    padding: 10px;
+  }
+  
+  .textarea-field {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Button styles */
+  .edit-button,
+  .add-button {
+    background-color: #fff;
+    color: #4b9bea;
+    border: 1px solid #4b9bea;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .edit-button:hover,
+  .add-button:hover {
+    background-color: #4b9bea;
+    color: #fff;
+  }
+  
+  .add-button {
+    display: block;
+    margin: 10px auto;
+  }
+  

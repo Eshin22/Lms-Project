@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Module.css";
 import { FiDownload, FiTrash2 } from "react-icons/fi";
+import EditableAccordion from "../../Components/EditableAccordion/EditableAccordion.jsx";
 
 function Accordion({ title, children }) {
   const [isOpen, setIsOpen] = useState(() => {
@@ -26,79 +27,79 @@ function Accordion({ title, children }) {
   );
 }
 
-function EditableAccordion({ title, defaultDuration, children }) {
-  const [duration, setDuration] = useState(() => {
-    // Load the saved duration from localStorage
-    return localStorage.getItem(`duration-${title}`) || defaultDuration;
-  });
+// function EditableAccordion({ title, defaultDuration, children }) {
+//   const [duration, setDuration] = useState(() => {
+//     // Load the saved duration from localStorage
+//     return localStorage.getItem(`duration-${title}`) || defaultDuration;
+//   });
 
-  const [isOpen, setIsOpen] = useState(() => {
-    // Retrieve saved state from localStorage, or default to true
-    const savedState = localStorage.getItem(`accordion-${title}`);
-    return savedState !== null ? JSON.parse(savedState) : true;
-  });
+//   const [isOpen, setIsOpen] = useState(() => {
+//     // Retrieve saved state from localStorage, or default to true
+//     const savedState = localStorage.getItem(`accordion-${title}`);
+//     return savedState !== null ? JSON.parse(savedState) : true;
+//   });
 
-  const toggleAccordion = () => {
-    const newState = !isOpen;
-    setIsOpen(newState);
-    localStorage.setItem(`accordion-${title}`, JSON.stringify(newState)); // Save state in localStorage
-  };
+//   const toggleAccordion = () => {
+//     const newState = !isOpen;
+//     setIsOpen(newState);
+//     localStorage.setItem(`accordion-${title}`, JSON.stringify(newState)); // Save state in localStorage
+//   };
 
-  // State to track if the duration is being edited
-  const [isEditing, setIsEditing] = useState(false);
+//   // State to track if the duration is being edited
+//   const [isEditing, setIsEditing] = useState(false);
 
-  // Toggle editing state
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing);
-  };
+//   // Toggle editing state
+//   const handleEditToggle = () => {
+//     setIsEditing(!isEditing);
+//   };
 
-  // Save the updated duration
-  const handleSave = () => {
-    setIsEditing(false);
-    localStorage.setItem(`duration-${title}`, duration); // Save to localStorage
-  };
+//   // Save the updated duration
+//   const handleSave = () => {
+//     setIsEditing(false);
+//     localStorage.setItem(`duration-${title}`, duration); // Save to localStorage
+//   };
 
-  // Cancel editing without saving
-  const handleCancel = () => {
-    setIsEditing(false);
-    setDuration(localStorage.getItem(`duration-${title}`) || defaultDuration);
-  };
+//   // Cancel editing without saving
+//   const handleCancel = () => {
+//     setIsEditing(false);
+//     setDuration(localStorage.getItem(`duration-${title}`) || defaultDuration);
+//   };
 
-  return (
-    <div className="accordion">
-      <div className="accordion-header" onClick={toggleAccordion}>
-        <h2 id="edit_accordion_title">{title}</h2>
+//   return (
+//     <div className="accordion">
+//       <div className="accordion-header" onClick={toggleAccordion}>
+//         <h2 id="edit_accordion_title">{title}</h2>
 
-        {isEditing ? (
-          <input
-            id="edit_duration"
-            type="text"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-          />
-        ) : (
-          <span id="duration">{`(${duration})`}</span>
-        )}
-        {isEditing ? (
-          <>
-            <button id="save_duration" onClick={handleSave}>
-              Save
-            </button>
-            <button id="cancel_duration" onClick={handleCancel}>
-              Cancel
-            </button>
-          </>
-        ) : (
-          <button id="edit_duration_button" onClick={handleEditToggle}>
-            Edit
-          </button>
-        )}
-        <span id="arrow">{isOpen ? "▲" : "▼"}</span>
-      </div>
-      {isOpen && <div className="accordion-content">{children}</div>}
-    </div>
-  );
-}
+//         {isEditing ? (
+//           <input
+//             id="edit_duration"
+//             type="text"
+//             value={duration}
+//             onChange={(e) => setDuration(e.target.value)}
+//           />
+//         ) : (
+//           <span id="duration">{`(${duration})`}</span>
+//         )}
+//         {isEditing ? (
+//           <>
+//             <button id="save_duration" onClick={handleSave}>
+//               Save
+//             </button>
+//             <button id="cancel_duration" onClick={handleCancel}>
+//               Cancel
+//             </button>
+//           </>
+//         ) : (
+//           <button id="edit_duration_button" onClick={handleEditToggle}>
+//             Edit
+//           </button>
+//         )}
+//         <span id="arrow">{isOpen ? "▲" : "▼"}</span>
+//       </div>
+//       {isOpen && <div className="accordion-content">{children}</div>}
+//     </div>
+//   );
+// }
 
 function CourseDetails() {
   const { moduleName } = useParams();
@@ -191,29 +192,7 @@ function CourseDetails() {
     return <div>Loading...</div>;
   }
 
-  // const [isEditing, setIsEditing] = useState(false);
-  // const [weekContain, setWeekContain] = useState(() => {
-  //   // Load the saved duration from localStorage
-  //   return localStorage.getItem(`duration-${title}`) || defaultDuration;
-  // });
 
-
-  // //  editing state
-  // const handleEdit = () => {
-  //   setIsEditing(!isEditing);
-  // };
-
-  // // Save the updated duration
-  // const handleSave = () => {
-  //   setIsEditing(false);
-  //   localStorage.setItem(`duration-${title}`, duration); // Save to localStorage
-  // };
-
-  // // Cancel editing without saving
-  // const handleCancel = () => {
-  //   setIsEditing(false);
-  //   setDuration(localStorage.getItem(`duration-${title}`) || defaultDuration);
-  // };
 
   return (
     <div className="course-details">
@@ -297,38 +276,17 @@ function CourseDetails() {
               </section>
             </Accordion>
 
-            <EditableAccordion
+            {/* <EditableAccordion
               title="Week_01"
               defaultDuration="Jan 13 - Jan 20"
             >
               <section>
                 <span>Encoding and Modulation</span>
-                {/* {isEditing ? (
-                  <input
-                    id="edit_Accordion_detail"
-                    type="text"
-                    value={weekContain}
-                    onChange={(e) => setWeekContain(e.target.value)}
-                  />
-                ) : (
-                  <span id="week_container">{`(${weekContain})`}</span>
-                )}
-                {isEditing ? (
-                  <>
-                    <button id="save_duration" onClick={handleSave}>
-                      Save
-                    </button>
-                    <button id="cancel_duration" onClick={handleCancel}>
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  <button id="edit_duration_button" onClick={handleEditToggle}>
-                    Edit
-                  </button>
-                )} */}
+                
               </section>
-            </EditableAccordion>
+            </EditableAccordion> */}
+            <EditableAccordion/>
+            
           </div>
         </>
       ) : (
