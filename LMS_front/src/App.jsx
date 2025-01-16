@@ -22,7 +22,7 @@ function App() {
           <Route path='/logging' element={<Logging/>} />
           <Route path='/profile' element={<Profile />} />
           <Route path="/modules/:moduleName" element={<Modules />} />
-          <Route path='/Accordion' element={<Accordion />} />
+ 
 
         </Routes>
       </div>

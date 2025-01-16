@@ -1,73 +1,101 @@
 /* Container styles */
 .accordion-container {
-    max-width: 600px;
-    margin: 20px auto;
-    font-family: Arial, sans-serif;
-  }
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+/* Accordion styles */
+.accordion {
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+/* Header styles */
+.accordion-header {
+  display: flex;
+  align-items: center;
+  background-color: #509ced;
+  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.accordion-header:hover {
+  background-color: #1f70c7;
+}
+.edit-fields {
+  display: flex;
+  gap: 10px;
+}
+
+.input-field {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+/* Content styles */
+.accordion-content {
+  background-color: #f8f9fa;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 600;
   
-  /* Accordion styles */
-  .accordion {
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  /* Header styles */
-  .accordion-header {
-    background-color: #4b9bea;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  .edit-fields {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .input-field {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* Content styles */
-  .accordion-content {
-    background-color: #f8f9fa;
-    padding: 10px;
-  }
-  
-  .textarea-field {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* Button styles */
-  .edit-button,
-  .add-button {
-    background-color: #fff;
-    color: #4b9bea;
-    border: 1px solid #4b9bea;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .edit-button:hover,
-  .add-button:hover {
-    background-color: #4b9bea;
-    color: #fff;
-  }
-  
-  .add-button {
-    display: block;
-    margin: 10px auto;
-  }
-  
+}
+
+.textarea-field {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Button styles */
+.edit-button,
+.delete-button {
+  margin-left: 10px;
+  padding: 10px 25px;
+  background-color: rgb(230, 234, 237);
+  color: #7d7c7c;
+}
+
+.edit-button:hover,
+.delete-button:hover,
+.add-button:hover {
+  color: #bfbaba;
+}
+
+.add-button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 25px;
+  background-color: rgb(230, 234, 237);
+  color: #7d7c7c;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+
+.accordion-title {
+  margin-right: 20px;
+  display: inline-block;
+}
+
+#arrow {
+  font-size: 1.0em;
+  /* Adjust font size */
+  margin-left: auto;
+  /* Push the arrow to the far right */
+  display: inline;
+  /* Ensure proper alignment */
+  align-items: left;
+  /* Vertically center the arrow within the header */
+}
